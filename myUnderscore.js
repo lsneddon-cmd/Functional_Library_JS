@@ -30,8 +30,15 @@ _.concat = (first, ...others) => {
 
 // Tuple
 _.createTuple = (a, b, c, ...d) => {
-  
+
 }
+
+// Create Array
+_.createArray = function() {
+  return Array.prototype.slice.call(arguments);
+}
+// Test
+console.log(`Create Array test: ${Array.isArray(_.createArray(1, 2, 4))}`);
 
 // Map, Filter, Reduce
 _.filter = (array, predicate) => {

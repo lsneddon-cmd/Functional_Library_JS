@@ -34,8 +34,8 @@ _.createTuple = (a, b, c, ...d) => {
 }
 
 // Create Array
-_.createArray = function() {
-  return Array.from(arguments);
+_.createArray = (...args) => {
+  return Array.prototype.slice.call(args);
 }
 // Test
 console.log(`Create Array test: ${Array.isArray(_.createArray(1, 2, 4))}`);
@@ -49,4 +49,17 @@ _.filter = (array, predicate) => {
   return storage;
 }
 
+_.reduce = (consumer, startValue, array) => {
+  if (_.length(array) === 0) return startValue;
+  const newStartValue = consumer(startValue, _.head(array));
+  return reduce(consumer, newStartValue, _.tail(array));
+}
 
+// Pipe
+_.pipe = (...funcs) => {
+  if (length(funcs) === 0) return input => input;
+  if (length(funcs) === 1) return input => head(funcs)(input);
+  return (input) => {
+    pipe(...tail(funcs))(head(funcs)(input));
+  }
+}

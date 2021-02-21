@@ -18,8 +18,20 @@ _.tail = (array) => {
   return array.slice(1);
 }
 // Test
-console.log(`Tail test: ${_.tail([1,2]) == [2]}`);
+console.log(`Tail test: ${_.tail([1,2])[0] === 2}`);
 
+_.concat = (first, ...others) => {
+  if (!others[0]) return first;
+  return _.concat(first.concat(_.head(others)), _.tail(others));
+}
+// problem with base case
+// console.log(_.concat([1], [2]));
+
+
+// Tuple
+_.createTuple = (a, b, c, ...d) => {
+  
+}
 
 // Map, Filter, Reduce
 _.filter = (array, predicate) => {
